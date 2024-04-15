@@ -1,0 +1,48 @@
+/* styles/Sidebar.module.css */
+.sidebar {
+    position: fixed;
+    top: 45px;
+    left: -480px; 
+    width: 500px;
+    height: 100%;
+    background-color: #E8EDEB;
+    padding: 20px;
+    transition: left 0.3s ease;
+    
+  }
+  
+  .sidebar.open {
+    left: 0;
+    align-items: center;
+  }
+  
+  .toggleButton {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar-content {
+    margin: 0px 50px 80px 50px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+  }
+  .profileImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 20px 105px; 
+    display: block;
+  }
+
+  .profileItem {
+  display: flex;
+  flex-direction: row;
+  display: inline-flex;
+  flex-wrap: 'wrap';
+  margin: 10px 0px 0 0;
+  align-items: center;
+  justify-content: center;
+  }

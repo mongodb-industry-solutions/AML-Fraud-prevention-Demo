@@ -1,0 +1,53 @@
+/* tableStyles.css */
+
+.table-container {
+  overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 0;
+  overflow: hidden;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+.min-width-column {
+  min-width: 200px; /* Set the minimum width as per your requirement */
+}
+
+th {
+  background-color: #ffffff;
+  color: #3D4F58;
+}
+
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+  background-color: #F9FBFA;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Hover effect for better interaction */
+tr:hover {
+  background-color: #E3FCF7;
+}
+
+/* Optional: Add styles for better readability */
+body {
+  font-family: 'Euclid Circular A ', sans-serif;
+  line-height: 1;
+  margin: 10px;
+  color: #555;
+}
+
+.table-wrapper {
+  overflow: auto;
+}

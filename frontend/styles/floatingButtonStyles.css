@@ -1,0 +1,13 @@
+/* floatingButtonStyles.css */
+
+.floating-button {
+    position: fixed;
+    bottom: 5%; /* Adjust the percentage as needed */
+    right: 5%; /* Adjust the percentage as needed */
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
