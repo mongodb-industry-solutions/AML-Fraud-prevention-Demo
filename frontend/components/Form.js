@@ -218,10 +218,7 @@ const FormComponent = () => {
                 </div>
               ) : sanction.length > 0  || AML || fraud ? (
                 <div className={styles.message}>
-                  {sanction.length > 0  ? <div>Your payment request has been declined because the beneficiary is a sanctioned entity.</div> : null}
-                  {AML === 1 ? <div>Your payment request has been declined due to potential anti-money laundering (AML) activity.</div> : null}
-                  {fraud === 1 ? <div>Your payment request has been declined due to potential fraud activity.</div> : null}
-                  <br />Please contact the Case Management team with your payment reference number to learn the exact reasons for this decline
+                  Your payment request has been declined. Please contact the Case Management team with your payment reference number to learn the exact reasons for this decline
                 </div>
               ) : (
                 <div className={styles.message}>

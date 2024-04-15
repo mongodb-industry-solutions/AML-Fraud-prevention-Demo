@@ -45,7 +45,7 @@ const LoginPage = () => {
       localStorage.setItem('name', exi[0].name);
       localStorage.setItem('address', exi[0].address);
       localStorage.setItem('risk', exi[0].risk);
-      localStorage.setItem('', exi[0].entity_type);
+      localStorage.setItem('entity_type', exi[0].entity_type);
       window.location.href = '/';
     }
   };

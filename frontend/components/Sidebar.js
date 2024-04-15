@@ -1,7 +1,7 @@
 // components/Sidebar.js
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/sidebar.module.css';
-import { H2,Body,Subtitle }  from '@leafygreen-ui/typography';
+import { H2,H3,Body,Subtitle }  from '@leafygreen-ui/typography';
 
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <div className={styles['sidebar-content']}>
-        <H2>My Profile</H2>
+        <H3 baseFontSize ={16} >My Profile</H3>
         <img className={styles.profileImage} src={'/images/userAvatar.png'} alt="Profile" />
         {loading ? (
           <p>Loading...</p>
