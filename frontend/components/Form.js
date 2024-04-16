@@ -135,36 +135,9 @@ const FormComponent = () => {
     //console.log("updateDoc",updateDoc);
     updateDoc.sanctioned = sanct;
     setSanction(sanct>0 ? sanctioned.document[0].entity_name : []);
-    await updateData(updateDoc);
+    await aml_Fraud_check(updateDoc);
     setverificationLoading(false);
     setLoading(false);
-  };
-
-  const updateData = async (updateDoc) => {
-    updateDoc.transaction_date= new Date()
-
-    const response = await fetch('/api/insertOne', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ col: 'transactions', insert: updateDoc, }) 
-    });
-    const data = await response.json();
-
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    await fetch(`${apiUrl}/embedings?_id=${data.insertedId}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' } });
-
-    const resp = await fetch(`${apiUrl}/verification?_id=${data.insertedId}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' } });
-    
-    const responseData = await resp.json();
-
-    await setAML(responseData.aml);
-    await setFraud(responseData.fraud);
-    setData(data);
-    return data;
   };
 
   const KYC = async (partiesInvolved) => {
@@ -192,6 +165,33 @@ const FormComponent = () => {
     return data;
   };
 
+  const aml_Fraud_check = async (updateDoc) => {
+    updateDoc.transaction_date= new Date()
+
+    const response = await fetch('/api/insertOne', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ col: 'transactions', insert: updateDoc, }) 
+    });
+    const data = await response.json();
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    await fetch(`${apiUrl}/embedings?_id=${data.insertedId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' } });
+
+    const resp = await fetch(`${apiUrl}/verification?_id=${data.insertedId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' } });
+    
+    const responseData = await resp.json();
+
+    await setAML(responseData.aml);
+    await setFraud(responseData.fraud);
+    setData(data);
+    return data;
+  };
+
   return (
     <div>
         <form style={{ display: 'flex', flexWrap: 'wrap',  }}>
@@ -211,7 +211,7 @@ const FormComponent = () => {
             </div>
           ) : (
             <div className={styles.container}>
-              Congratulations, your payment request has been completed successfully. Please copy your reference number for future reference: {data.insertedId} 
+              Please copy your reference number for future reference: {data.insertedId} 
               {verificationLoading ? (
                 <div className={styles.message}>
                   Verification is in process...
@@ -222,7 +222,7 @@ const FormComponent = () => {
                 </div>
               ) : (
                 <div className={styles.message}>
-                  Verification complete. Transaction successful.
+                  Verification complete. Congratulations, your payment request has been completed successfully. 
                 </div>
               )}
             </div>
