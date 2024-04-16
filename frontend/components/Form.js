@@ -20,7 +20,7 @@ const FormComponent = () => {
     
     { label: "Beneficiary Entity Type", type: "text", name: "be_acc_type" ,disabled: true, value:"" },
     //{ label: "Beneficiary ID", type: "number", name: "beneficiary_id" ,disabled: true, value:"" },
-    { label: "Originator Entity Name", type: "text", name: "beneficiary_type" ,disabled: false , value:"" },
+    { label: "Beneficiary Entity Name", type: "text", name: "beneficiary_type" ,disabled: false , value:"" },
     { label: "Reported Beneficiary Address", type: "text", name: "reported_beneficiary_address" ,disabled: false, value:""  },
     { label: "Beneficiary Risk", type: "text", name: "risk" ,disabled: true, value: ""},
     { label: "Transaction Amount", type: "number", name: "transaction_amount" ,disabled: false, value: ""  },
@@ -136,8 +136,8 @@ const FormComponent = () => {
     updateDoc.sanctioned = sanct;
     setSanction(sanct>0 ? sanctioned.document[0].entity_name : []);
     await aml_Fraud_check(updateDoc);
-    setverificationLoading(false);
     setLoading(false);
+    setverificationLoading(false);
   };
 
   const KYC = async (partiesInvolved) => {
@@ -211,20 +211,20 @@ const FormComponent = () => {
             </div>
           ) : (
             <div className={styles.container}>
-              Please copy your reference number for future reference: {data.insertedId} 
               {verificationLoading ? (
                 <div className={styles.message}>
                   Verification is in process...
                 </div>
               ) : sanction.length > 0  || AML || fraud ? (
                 <div className={styles.message}>
-                  Your payment request has been declined. Please contact the Case Management team with your payment reference number to learn the exact reasons for this decline
+                  Your payment request has been declined. <br />Please contact the Case Management team with your payment reference number to learn the exact reasons for this decline.
                 </div>
               ) : (
                 <div className={styles.message}>
-                  Verification complete. Congratulations, your payment request has been completed successfully. 
+                  Congratulations, your payment request has been completed successfully. <br />Verification complete.
                 </div>
               )}
+              Kindly retain the transaction reference number for future reference: {data.insertedId} 
             </div>
           )}
         </Popup>

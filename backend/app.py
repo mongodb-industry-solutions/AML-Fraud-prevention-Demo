@@ -31,6 +31,17 @@ def get_embedding(text, model="text-embedding-3-small"):
    return res.data[0].embedding
 
 def fraud_encode(doc):
+    pipeline = [ {  '$match': {'originator_id': doc["originator_id"] } }
+               , {  '$group': { '_id': '$originator_id', 
+                    'std': { '$stdDevSamp': '$transaction_amount'}, 
+                    'mdn': {'$median': { 'input': '$transaction_amount', 'method': 'approximate' } }
+                } } ]
+    result = list(collection.aggregate(pipeline))
+    filter = {'originator_id': doc["originator_id"],'transaction_date': {'$gte': doc["transaction_date"] - timedelta(hours=1), '$lte': doc["transaction_date"]}}
+    trans_h_ago = list(collection.find(filter,{"transaction_amount":1,"_id":0}))
+    h_ago = len(trans_h_ago)
+    total_amount = sum(item['transaction_amount'] for item in trans_h_ago)
+    
     text =  ''
     especially = ''
     if doc["reported_originator_address"].split(",")[-1].strip() != doc["reported_beneficiary_address"].split(",")[-1].strip():
@@ -44,13 +55,6 @@ def fraud_encode(doc):
         text+= f'This is the first transaction between the originator and beneficiary. '
     elif first>5:
         text+= f'The originator and beneficiary have made many transactions before. '
-    
-    pipeline = [ {  '$match': {'originator_id': doc["originator_id"] } }
-               , {  '$group': { '_id': '$originator_id', 
-                    'std': { '$stdDevSamp': '$transaction_amount'}, 
-                    'mdn': {'$median': { 'input': '$transaction_amount', 'method': 'approximate' } }
-                } } ]
-    result = list(collection.aggregate(pipeline))
 
     if doc["transaction_amount"] <= result[0]["mdn"]:
         text+= f'The transaction was for ${doc["transaction_amount"]}, which is low for the originator. '
@@ -58,17 +62,11 @@ def fraud_encode(doc):
         text+= f'The transaction was for ${doc["transaction_amount"]}, which is unusually high for the originator. ' + especially
     else:
         text+= f'The transaction was for ${doc["transaction_amount"]}, which is high for the originator. ' + especially
-    
 
     if doc["transaction_amount"] > 10000:
         text+= f'The transaction is also above the reporting limit. '
     elif doc["transaction_amount"] > 9000:
         text+= f'The transaction is also below, yet close the reporting limit. '
-
-    filter = {'originator_id': doc["originator_id"],'transaction_date': {'$gte': doc["transaction_date"] - timedelta(hours=1), '$lte': doc["transaction_date"]}}
-    trans_h_ago = list(collection.find(filter,{"transaction_amount":1,"_id":0}))
-    h_ago = len(trans_h_ago)
-    total_amount = sum(item['transaction_amount'] for item in trans_h_ago)
     
     if  h_ago == 0 :
         text+= f'This is the first transaction for the originator in the past hour, which is low activity.'
@@ -85,7 +83,6 @@ def fraud_encode(doc):
         else :
             text+= f'The total ammount for the {h_ago} transactions was of ${total_amount}, which is high for the originator. ' + especially
 
-    #return model.encode(text).tolist()  
     return text
 
 def AML_encode(doc):
