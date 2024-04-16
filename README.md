@@ -2,7 +2,7 @@
 
 Fraud and anti-money laundering (AML) are major concerns for both businesses and consumers, affecting areas like financial services and e-commerce. Traditional methods of tackling these issues, such as rule-based systems and predictive artificial intelligence (AI), have been useful over the years but can be outsmarted by clever fraudsters who are constantly leveraging new techniques. 
 
-[Watch the video!](https://www.mongodb.com/blog/post/credit-scoring-applications-with-generative-ai)
+[Watch the video!](https://drive.google.com/file/d/1s6GfU0pe5gaZIauqF6O7KRBURv_3KKNr/view?usp=drive_link)
 
 This GitHub repository presents a demo in which you will be able to log on as a bank's client. As such you will see his/her ledger as well as make new transactions. These transactions will pass through a custom 
 verification process that will determined if the transaction is suspected of AML, Fraud or if any involved party has been sanctioned. This process include exiting MongoDB functionalities such as full text search and vector search.
