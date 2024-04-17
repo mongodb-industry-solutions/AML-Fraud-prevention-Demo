@@ -39,3 +39,7 @@ You should have two APIs:
 
 > [!Warning]
 > If you want to deploy this on a server then you will need to install pm2, on top of the requirements. you will also need to call the APIs with the server's API which will need to be updated on the <location_of_your_repo>/AML-Fraud-prevention-Demo/frontend/.env file.
+
+Once you have done everything, we can move on to the next part:
+- [Installation of the frontend](../frontend/)
+- Or go back [to the main page](../)

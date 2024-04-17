@@ -28,10 +28,11 @@ Finally, for said function we will create a HTTPS endpoint:
 - Activate "Create User Upon Authentication"
 - And don't forget to save and deploy
 
-![image](/AtlasEndpoint.png)
+![image](./AtlasEndpoint.png)
 
 > [!Note]
 > The URL will need to go on the NEXT_PUBLIC_FUZZY_URL parameter on the .env file on the frontend.
 
 Once you have done everything, we can move on to the next part:
 - [Installation of the backend](../backend/)
+- Or go back [to the main page](../)

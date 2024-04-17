@@ -20,7 +20,7 @@ The installation is divided into 5 parts:
 - [Installation of the backend](./backend/)
 - [Installation of the frontend](./frontend/)
 
-# Summary
+## Summary
 
 This demonstration serves as an interesting example for clearing transactions using innovative technologies such as OpenAI embeddings and MongoDB search capabilities.
 
@@ -30,3 +30,8 @@ In the previous sections, we explored how to:
 - Set up your collection for both full-text and vector search.
 
 Are you prepared to harness these capabilities for your projects? Should you encounter any roadblocks or have questions, our vibrant [developer forums](https://www.mongodb.com/community/forums/) are here to support you every step of the way. Or if you prefer to contact us directly at [industry.solutions@mongodb.com](mailto:industry.solutions@mongodb.com).
+
+
+## Disclaimer
+
+This product is not a MongoDB official product. Use at your own risk!

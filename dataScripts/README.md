@@ -1,5 +1,3 @@
-Here's the spell-checked version of your text:
-
 These are some Python scripts to generate randomly generated documents for your demo collections.
 
 ## Getting Started
@@ -75,3 +73,4 @@ It usually takes a couple of minutes. If you need more information on how to cre
 
 Once you have done everything, we can move on to the next part:
 - [Installation of the serverless function](../app_services)
+- Or go back [to the main page](../)
