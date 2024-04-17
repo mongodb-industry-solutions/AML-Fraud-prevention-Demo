@@ -27,5 +27,5 @@ frontend/yarn-error.log*
 frontend/.env*
 backend/.env*
 dataScripts/.env*
-datascripts/.env*
+datascripts/test*
 src/.env*
