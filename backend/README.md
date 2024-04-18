@@ -41,7 +41,7 @@ You should have two APIs:
 
 Both flows for AML and Fraud work the same way. We generate a text description of the transaction. These texts are, of course, going to describe different things for AML and Fraud, as we focus on different information for each of them. For example, for Fraud, we will focus on the number of transactions in the last hour, the amount of the transactions, and whether or not the transaction is national or international. For AML, we will focus on inconsistencies or whether or not there is any shared contact information between the originator and the beneficiary. If you are more interested in this, you can check the AML_encode and fraud_encode functions in the app.py file in this folder.
 
-![image](/AML_Fraud.png)
+![image](./AML_Fraud.png)
 
 As you can see from the image above, the Embeddings API will generate both the pattern text and the Embedding and insert it into the database. The second API is the Verification one, this is where we will check if the transaction will indeed be flagged for AML or Fraud. Its logic is to ask for 4000 similar transactions thanks to vector search. Then we will see the proportion of flagged transactions amongst the similar transactions. If there are at least 50% of them that have been flagged then the transaction will be flagged too.
 
