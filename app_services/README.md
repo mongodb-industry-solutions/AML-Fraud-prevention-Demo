@@ -1,3 +1,5 @@
+# Installation of the serverless function
+
 In this part we will set up your own microservice with MongoDB's app services. So if you haven't already start by [creating your own App Services application](https://www.mongodb.com/docs/atlas/app-services/apps/create/).
 
 ## Getting Started
@@ -17,6 +19,9 @@ We need to create an Atlas function for the vector.js file. To do so:
 - Select "Save draft". 
 - When prompted select "Review draft & deploy", and then "Deploy".
 
+> [!Warning]
+> By allowing the anonymous log ins, and setting the system authentication on the function, we have made the function public. Should you want to protect it your function please refer to our documentation to [set up an authentication method](https://www.mongodb.com/docs/atlas/app-services/authentication/) such as Email/Password, API Key, Custom JWT and others.
+
 Finally, for said function we will create a HTTPS endpoint:
 - From the App Services application navigate to "HTTPS Endpoint" using the left menu.
 - Then click the green "Add an Endpoint" button in the top right corner.
@@ -31,7 +36,7 @@ Finally, for said function we will create a HTTPS endpoint:
 ![image](./AtlasEndpoint.png)
 
 > [!Note]
-> The URL will need to go on the NEXT_PUBLIC_FUZZY_URL parameter on the .env file on the frontend.
+> The URL will need to go on the NEXT_PUBLIC_FUZZY_URL parameter on the <location_of_your_repo>/AML-Fraud-prevention-Demo/frontend/.env file.
 
 Once you have done everything, we can move on to the next part:
 - [Installation of the backend](../backend/)

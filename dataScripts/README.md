@@ -1,3 +1,5 @@
+# Installation of the dataset
+
 These are some Python scripts to generate randomly generated documents for your demo collections.
 
 ## Getting Started

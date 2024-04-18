@@ -1,3 +1,5 @@
+# Installation of the frontend
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -17,7 +19,7 @@ NODE_ENV=development
 NEXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
-> [!Warning]
+> [!Note]
 > If you want if the backend was deployed into a server, then you have to put the server's IP adress in the NEXT_PUBLIC_API_URL above.
 
 Lastly, run the development server:
