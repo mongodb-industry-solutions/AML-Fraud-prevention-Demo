@@ -8,7 +8,7 @@ First, make sure that you have npm or yarn installed in your computer, if you do
 - [npm installation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn installation](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
-Next, please make sure to add a .env file in the foler <location_of_your_repo>/AML-Fraud-prevention-Demo/frontend.
+Next, please make sure to add a .env file in the folder <location_of_your_repo>/AML-Fraud-prevention-Demo/frontend.
 It should include the following :
 
 ```md
@@ -20,7 +20,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
 > [!Note]
-> If you want if the backend was deployed into a server, then you have to put the server's IP adress in the NEXT_PUBLIC_API_URL above.
+> If the backend was deployed into a server, then you have to put the server's IP address in the NEXT_PUBLIC_API_URL above.
 
 Lastly, run the development server:
 
