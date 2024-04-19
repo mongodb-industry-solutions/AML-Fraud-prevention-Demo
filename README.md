@@ -37,7 +37,11 @@ You can also dive into the following resources:
 - [Fraud Prevention with MongoDB](https://www.mongodb.com/industries/financial-services/fraud-prevention)
 - [Resources to Build AI-powered Apps](https://www.mongodb.com/library/use-cases/artificial-intelligence)
 
-
 ## Disclaimer
 
 This product is not a MongoDB official product. Use at your own risk!
+
+## Authors
+
+- Shiv Pullepu, Principal, Financial Industry Solutions, MongoDB
+- Paul Claret, Senior Specialist, Industry Solutions, MongoDB
