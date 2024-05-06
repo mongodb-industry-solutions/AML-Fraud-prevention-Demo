@@ -39,6 +39,8 @@ You can also dive into the following resources:
 
 ## Disclaimer
 
+This is an alpha version of the proposed idea at .Local NYC and is an example solution and should be treated as such. Main focus of this solution is to showcase Vector search.
+
 This product is not a MongoDB official product. Use at your own risk!
 
 ## Authors
