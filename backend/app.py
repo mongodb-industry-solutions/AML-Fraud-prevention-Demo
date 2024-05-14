@@ -41,16 +41,17 @@ def fraud_encode(doc):
     trans_h_ago = list(collection.find(filter,{"transaction_amount":1,"_id":0}))
     h_ago = len(trans_h_ago)
     total_amount = sum(item['transaction_amount'] for item in trans_h_ago)
+    acc = list(accounts.find({'_id': doc["originator_id"] }))
+    first = collection.count_documents({'originator_id': doc["originator_id"], 'beneficiary_id': doc["beneficiary_id"] }) 
     
     text =  ''
     especially = ''
     if doc["reported_originator_address"].split(",")[-1].strip() != doc["reported_beneficiary_address"].split(",")[-1].strip():
-        text+= f'An international transaction was initiated by {doc["originator_type"]} to {doc["beneficiary_type"]} on {doc["transaction_date"]}. '
+        text+= f'An international transaction was initiated on {doc["transaction_date"]}. '
         especially = 'This is unusual, especially for international transations. '
     else:
-        text+= f'An national transaction was initiated by {doc["originator_type"]} to {doc["beneficiary_type"]} on {doc["transaction_date"]}. '
+        text+= f'An national transaction was initiated on {doc["transaction_date"]}. '
     
-    first = collection.count_documents({'originator_id': doc["originator_id"], 'beneficiary_id': doc["beneficiary_id"] }) 
     if first==1:
         text+= f'This is the first transaction between the originator and beneficiary. '
     elif first>5:
@@ -63,14 +64,14 @@ def fraud_encode(doc):
     else:
         text+= f'The transaction was for ${doc["transaction_amount"]}, which is high for the originator. ' + especially
 
-    if doc["transaction_amount"] > 10000:
-        text+= f'The transaction is also above the reporting limit. '
-    elif doc["transaction_amount"] > 9000:
-        text+= f'The transaction is also below, yet close the reporting limit. '
+    if doc["transaction_amount"] > acc[0]["transaction-limits"]["max-transaction-limit"]:
+        text+= f'The transaction is also above the maximum transaction limit set by the user. '
+    elif doc["transaction_amount"] > acc[0]["transaction-limits"]["max-transaction-limit"]-1000:
+        text+= f'The transaction is also below, yet close the maximum transaction limit set by the user. '
     
     if  h_ago == 0 :
         text+= f'This is the first transaction for the originator in the past hour, which is low activity.'
-    elif h_ago > 4:
+    elif h_ago > acc[0]["transaction-limits"]["max-num-transactions"]:
         text+= f'This is transaction number {h_ago} within the past hour. This unusually high activity for the originator. '
     else:
         text+= f'This is transaction number {h_ago} within the past hour. This is normal to busy activity for the originator.'
@@ -82,6 +83,10 @@ def fraud_encode(doc):
             text+= f'The total ammount for the {h_ago} transactions was of ${total_amount}, which is unusually high for the originator. ' + especially
         else :
             text+= f'The total ammount for the {h_ago} transactions was of ${total_amount}, which is high for the originator. ' + especially
+    
+    if 'description' in doc:
+        if doc['description'] != '':
+            text += f'The originator added a description to the transaction : '+ doc['description']
 
     return text
 
@@ -119,7 +124,10 @@ def AML_encode(doc):
     if doc["reported_beneficiary_address"] == doc["reported_originator_address"]:
         text+= f'The originator and beneficiary have the same address on the transaction.'
 
-    #return model.encode(text).tolist()  
+    if 'description' in doc:
+        if doc['description'] != '':
+            text += f'The originator added a description to the transaction : '+ doc['description']
+     
     return text
 
 def vector_search_pipeline(test, limit, query_vector):

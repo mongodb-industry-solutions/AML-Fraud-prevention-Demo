@@ -60,6 +60,11 @@ def name_generator():
             "email": random.choice([person.email(),person.email(),person.email(),random.choice(['schemes1855@protonmail.com', 'centuries1991@example.com', 'contributors1969@example.com', 'interfaces2022@example.org', 'self1912@example.org', 'glen2094@protonmail.com']) ]),
         },
         "risk": random.choice(['low', 'medium', 'high']),
+        "transaction-limits": {
+            "max-transaction-limit": 10000,
+            "max-num-transactions": 10
+        }
+
     }
     return result
 

@@ -25,6 +25,7 @@ const FormComponent = () => {
     { label: "Beneficiary Risk", type: "text", name: "risk" ,disabled: true, value: ""},
     { label: "Transaction Amount", type: "number", name: "transaction_amount" ,disabled: false, value: ""  },
     { label: "Transaction Date/Time", type: "date", name: "transaction_date", disabled: true, value: ""},
+    { label: "Transaction description", type: "text", name: "description", disabled: false, value: ""},
   ];
 
   const [formState, setFormState] = useState(account);

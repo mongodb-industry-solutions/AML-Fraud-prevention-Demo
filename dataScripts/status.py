@@ -27,7 +27,8 @@ def fraud_check(doc):
     h_ago = len(trans_h_ago)
     total_amount = sum(item['transaction_amount'] for item in trans_h_ago)
     #print(total_amount, h_ago)
-    if ((geoLogic=="International" and (total_amount>1000 or h_ago>2)) or (geoLogic=="National" and (total_amount>4000 or h_ago>4)) ):
+    if ((geoLogic=="International" and (total_amount>1000 or h_ago>2)) or (geoLogic=="National" and (total_amount>4000 or h_ago>4)) ): 
+      # This should not be problematic as this is about data initialisation and it's a way to simulated real-life behaviour
       return pymongo.UpdateOne( {'_id': doc["_id"]}, {'$set': { "fraud": 1 } },upsert=True )
     else:
       return pymongo.UpdateOne( {'_id': doc["_id"]}, {'$set': { "fraud": 0 } },upsert=True )
@@ -37,6 +38,7 @@ def aml_check(doc):
     if (acc[0]["contact_information"]["address"] == acc[1]["contact_information"]["address"] 
         or acc[0]["contact_information"]["phone_number"] == acc[1]["contact_information"]["phone_number"] or acc[0]["contact_information"]["email"] == acc[1]["contact_information"]["email"] 
         or (acc[0]["risk"] == "high" and acc[1]["risk"] != "low") or (acc[0]["risk"] != "low" and acc[1]["risk"] == "high") or (acc[0]["risk"] == "medium" and acc[1]["risk"] == "medium")):
+      # This should not be problematic as this is about data initialisation and it's a way to simulated real-life behaviour
       return pymongo.UpdateOne( {'_id': doc["_id"]}, {'$set': { "aml": 1 } },upsert=True )
     else:
       return pymongo.UpdateOne( {'_id': doc["_id"]}, {'$set': { "aml": 0 } },upsert=True )
