@@ -1,0 +1,20 @@
+services:
+  aml-fraud-detection-front:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: aml-fraud-detection-front:latest
+    ports:
+      - "3000:3000"
+    restart: always
+    container_name: aml-fraud-detection-front
+
+  aml-fraud-detection-back:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: aml-fraud-detection-back:latest
+    ports:
+      - "8080:8080"
+    restart: always
+    container_name: aml-fraud-detection-back

@@ -26,14 +26,6 @@ const HomePage = () => {
     } 
   }, []);
 
-  const handleAddButtonClick = () => {
-    setPopupOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setPopupOpen(false);
-  };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

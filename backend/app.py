@@ -30,7 +30,7 @@ def get_embedding(text, model="text-embedding-3-small"):
    res = OAI.embeddings.create(input = [text], model=model)
    return res.data[0].embedding
 
-def fraud_encode(doc):
+def fraud_encode(doc, near =1000):
     pipeline = [ {  '$match': {'originator_id': doc["originator_id"] } }
                , {  '$group': { '_id': '$originator_id', 
                     'std': { '$stdDevSamp': '$transaction_amount'}, 
@@ -66,7 +66,7 @@ def fraud_encode(doc):
 
     if doc["transaction_amount"] > acc[0]["transaction-limits"]["max-transaction-limit"]:
         text+= f'The transaction is also above the maximum transaction limit set by the user. '
-    elif doc["transaction_amount"] > acc[0]["transaction-limits"]["max-transaction-limit"]-1000:
+    elif doc["transaction_amount"] > acc[0]["transaction-limits"]["max-transaction-limit"]-near:
         text+= f'The transaction is also below, yet close the maximum transaction limit set by the user. '
     
     if  h_ago == 0 :
@@ -204,4 +204,4 @@ def verification():
     return jsonify(set_doc)
 
 if __name__ == "__main__": 
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=False)

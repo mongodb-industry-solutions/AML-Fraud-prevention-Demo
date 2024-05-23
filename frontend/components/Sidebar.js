@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/sidebar.module.css';
 import { H2,H3,Body,Subtitle }  from '@leafygreen-ui/typography';
+import Image from 'next/image';
 
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
@@ -41,13 +42,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <div className={styles['sidebar-content']}>
         <H3 baseFontSize ={16} >My Profile</H3>
-        <img className={styles.profileImage} src={'/images/userAvatar.png'} alt="Profile" />
+        <Image className={styles.profileImage} src={'/images/userAvatar.png'} alt="Profile" />
         {loading ? (
           <p>Loading...</p>
         ) : (
           <div>
             {Object.keys(data).map((key, index) => (
-              <div className={styles.profileItem}>
+              <div className={styles.profileItem} key={index}>
                 <Subtitle>{formatFieldName(key)}:&nbsp;</Subtitle>
                 <Body baseFontSize={16}>{data[key]}</Body>
               </div>

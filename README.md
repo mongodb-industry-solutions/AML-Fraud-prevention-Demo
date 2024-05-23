@@ -22,6 +22,31 @@ The installation is divided into 5 parts:
 - [Installation of the backend](./backend/)
 - [Installation of the frontend](./frontend/)
 
+### Build the backend and frontend with Docker (faster)
+
+To build the Docker images and start the services, run the following command:
+
+```
+make build
+```
+
+### Stopping the Application
+
+To stop all running services, use the command:
+
+```
+make stop
+```
+
+### Cleaning Up
+
+To remove all images and containers associated with the application, execute:
+
+```
+make clean
+```
+
+
 ## Summary
 
 This demonstration serves as an interesting example for clearing transactions using innovative technologies such as OpenAI embeddings and MongoDB search capabilities.
