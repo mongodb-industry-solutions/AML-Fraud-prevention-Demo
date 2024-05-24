@@ -84,7 +84,7 @@ const LoginPage = () => {
             <H2 style={styles.button}>AML and Fraud prevention</H2>
             <TextInput
               label="Client ID"
-              placeholder="121"
+              placeholder="48172"
               onChange={handleClientIdChange}
               value={clientId}
               style={{position: 'relative', top: '0px', left: '-10px',  width: '180px', boxSizing: 'border-box',  padding: '5px',}}
