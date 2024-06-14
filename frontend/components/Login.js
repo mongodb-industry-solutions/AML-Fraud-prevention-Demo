@@ -12,9 +12,6 @@ const LoginPage = () => {
 
   const handleClientIdChange = (event) => {
     setClientId(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
@@ -92,7 +89,7 @@ const LoginPage = () => {
             <PasswordInput
               label="Enter Password"
               id="new-password"
-              onChange={handlePasswordChange}
+              onChange={handleClientIdChange}
               value={password}
               style={{position: 'relative', top: '0px', left: '14px',  width: '180px',}}
             />

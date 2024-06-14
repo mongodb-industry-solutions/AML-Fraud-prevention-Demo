@@ -44,7 +44,7 @@ const TransactionTable = () => {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 10000); // Fetch data every 5 seconds
+    const intervalId = setInterval(fetchData, 2000); 
 
     return () => {
       clearInterval(intervalId);

@@ -5,6 +5,7 @@ import { H2,H3,Body,Subtitle }  from '@leafygreen-ui/typography';
 import Image from 'next/image';
 
 
+
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   
   const [data, setData] = useState([]);
@@ -32,6 +33,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   useEffect(() => {
     fetchData();
+    const intervalId = setInterval(fetchData, 2000); // Fetch data every 5 seconds
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const formatFieldName = (fieldName) => {
@@ -42,7 +48,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <div className={styles['sidebar-content']}>
         <H3 baseFontSize ={16} >My Profile</H3>
-        <Image className={styles.profileImage} src={'/images/userAvatar.png'} alt="Profile" />
+        <Image className={styles.profileImage} src={'/images/userAvatar.png'} alt="Profile" width={100} height={100}/>
         {loading ? (
           <p>Loading...</p>
         ) : (
