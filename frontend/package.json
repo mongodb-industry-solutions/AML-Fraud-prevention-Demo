@@ -14,6 +14,7 @@
     "@leafygreen-ui/button": "^21.0.12",
     "@leafygreen-ui/code": "^14.2.19",
     "@leafygreen-ui/date-picker": "^1.0.1",
+    "@leafygreen-ui/expandable-card": "^3.2.2",
     "@leafygreen-ui/icon": "^11.28.0",
     "@leafygreen-ui/loading-indicator": "^2.0.8",
     "@leafygreen-ui/logo": "^8.0.12",
@@ -37,6 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.22.2",
     "realm-web": "^2.0.0",
     "uuid": "^9.0.1"

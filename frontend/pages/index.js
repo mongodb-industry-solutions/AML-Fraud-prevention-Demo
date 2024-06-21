@@ -8,6 +8,10 @@ import { H2, Body }  from '@leafygreen-ui/typography';
 import { Tabs, Tab } from '@leafygreen-ui/tabs';
 import TransactionTable from '../components/TransactionTable';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import ExpandableCard from '@leafygreen-ui/expandable-card';
+import ReactMarkdown from 'react-markdown';
+
 
 const HomePage = () => {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -66,13 +70,67 @@ const HomePage = () => {
       </button>
   );
 
+  const markdownText = `This demo showcases how MongoDB vector search can enhance fraud and AML detection accuracy by instantly identifying suspicious activity.
+  
+  ## Fraud and AML Detection Workflow
+  Using artificially generated test data [1] for payment fraud and AML, incoming transactions are evaluated based on the percentage of previous transactions with similar characteristics that have failed due to suspicious activity. This is achieved through the use of OpenAI vector embeddings [2] and Atlas Vector search.
+  
+  ## Dashboard Features
+  - **My Transactions**: A read-only display of all previous transactions of the user.
+  - **New Transaction Screen**: Allows users to simulate a transaction.
+  
+  ## How to Simulate a Transaction
+  1. Provide counterparty details (Originator and Beneficiary). Only the Beneficiary Name and transaction amount are required.
+  2. Click submit to see Atlas vector search in action.
+  3. The submitted transaction is processed for both fraud detection and AML.
+  
+  ## Outcome of Transaction Processing
+  - **If flagged for fraud**: The transaction request is declined.
+  - **If not flagged**: The transaction is completed successfully, and a confirmation message is shown.
+  
+  For rejected transactions, users can contact case management services with the transaction reference number for details. No action is needed for successful transactions.
+  
+  ---
+  
+  ### Footer notes:
+  [1] Artificially generated using Python  
+  [2] A vector embedding is a way of organizing data that makes it easier to identify similarities and relationships between different pieces of information. In this demo, the fraud embedding is based on a logical combination of text with transaction and counterparty data. The AML vector combines transactions, relationships between counterparties, and their risk profiles information.
+  `;
+
+  const markdownTextLines = markdownText.split('\n').map((line, index) => {
+    const boldText = line.match(/\*\*(.*?)\*\*/g);
+    if (boldText) {
+      boldText.forEach((match) => {
+        const bold = match.replace(/\*\*/g, '');
+        line = line.replace(match, `<strong>${bold}</strong>`);
+      });
+    }
+    line = line.replace(/\t/g, '&emsp;');
+    return (
+      <p key={index} style={{ margin: '0', padding: '0.5em 0' }}>
+        <div dangerouslySetInnerHTML={{ __html: line }} />
+      </p>
+    );
+  });
+
   return (
+    <>
+    <Head>
+        <title>Vector AML Fraud demo</title>
+        <link rel="icon" href="/favicon.ico" />
+    </Head>
     <div>
       <Header />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <>{toggleButton}</>
       <div style={{margin: isSidebarOpen ? '75px 0 0 570px' : '70px 0 0 80px', transition: 'left 0.3s ease' }}>
         <div style={{ marginBottom: '20px' }}>
+            <ExpandableCard
+              title="Instructions"
+              darkMode={false}
+              style={{ margin: '10px 5px 15px', marginTop: '30px' }}>
+                <ReactMarkdown>{markdownText}</ReactMarkdown>
+            </ExpandableCard>
           <H2>My Dashboard</H2>
         </div>
         <Tabs setSelected={setSelected} selected={selected} baseFontSize={16}>
@@ -85,6 +143,7 @@ const HomePage = () => {
         </Tabs>
       </div>
     </div>
+    </>
   );
 };
 

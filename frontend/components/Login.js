@@ -5,6 +5,7 @@ import { H2 } from '@leafygreen-ui/typography';
 import { MongoDBLogoMark } from '@leafygreen-ui/logo';
 import { Body }  from '@leafygreen-ui/typography';
 import Button  from '@leafygreen-ui/button';
+import Head from 'next/head';
 
 const LoginPage = () => {
   const [clientId, setClientId] = useState('');
@@ -74,6 +75,11 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+      <Head>
+          <title>Vector AML Fraud demo</title>
+          <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div style={styles.container}>
         <div style={styles.loginBox}>
           <form style={styles.form}>
@@ -97,6 +103,7 @@ const LoginPage = () => {
           </form>
       </div>
     </div>
+  </>
   );
 };
 

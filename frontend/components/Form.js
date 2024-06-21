@@ -45,32 +45,53 @@ const FormComponent = () => {
     setPopupOpen(false);
   };
 
-  const handleChange = async (event, dataType, fieldName) => {
-    let value = event.target.value;
-    switch (dataType) {
-      case 'number':
-        value = Number(value);
-        break;
-      case 'text':
-        value = String(value);
-        break;
-      case 'date':
-        value = Date(value);
-        break;
-      default:
-        break;
+  // Add a new state variable for the beneficiary_type input
+const [beneficiaryTypeInput, setBeneficiaryTypeInput] = useState('');
+
+// Update the handleChange function
+const handleChange = async (event, dataType, fieldName) => {
+  let value = event.target.value;
+  switch (dataType) {
+    case 'number':
+      value = Number(value);
+      break;
+    case 'text':
+      value = String(value);
+      break;
+    case 'date':
+      value = Date(value);
+      break;
+    default:
+      break;
+  }
+  if (fieldName === 'beneficiary_type') {
+    setBeneficiaryTypeInput(value); // Update the input state immediately
+    const pipeline = [ { "$match":{ name:  { $regex: `^${value}$`, $options: 'i' }  }}, { "$project": { _id: 1, address: "$contact_information.address", risk:1,entity_type:1 }} ]
+    console.log("pipeline",pipeline);
+    const benef_id= await fetchData(pipeline)
+    if (benef_id.length > 0) {
+      setFormState({ ...formState, [fieldName]: value, beneficiary_id: benef_id[0]._id, reported_beneficiary_address: benef_id[0].address, risk: benef_id[0].risk, be_acc_type: benef_id[0].entity_type});
+    } else {
+      setFormState({ ...formState, [fieldName]: value, beneficiary_id: '', reported_beneficiary_address: '', risk: '', be_acc_type:'' });
     }
+  } else {
     setFormState({ ...formState, [fieldName]: value });
-    if (fieldName === 'beneficiary_type') {
-       const pipeline = [ { "$match":{ name: value }}, { "$project": { _id: 1, address: "$contact_information.address", risk:1,entity_type:1 }} ]
-       const benef_id= await fetchData(pipeline)
-       if (benef_id.length > 0) {
-        setFormState({ ...formState, [fieldName]: value, beneficiary_id: benef_id[0]._id, reported_beneficiary_address: benef_id[0].address, risk: benef_id[0].risk, be_acc_type: benef_id[0].entity_type});
-       } else {
-        setFormState({ ...formState, [fieldName]: value, beneficiary_id: '', reported_beneficiary_address: '', risk: '', be_acc_type:'' });
-       }
-    }
-  };
+  }
+};
+
+const renderInput = (field) => {
+  const fieldValue = field.value !== "" ? field.value : field.name === 'beneficiary_type' ? beneficiaryTypeInput : formState[field.name] || '';
+  switch (field.type) {
+    case 'text':
+      return <TextInput label={field.label} sizeVariant={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
+    case 'number':
+      return <NumberInput label={field.label} size={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
+    case 'date':
+      return <DatePicker label={field.label} size={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
+    default:
+      return null;
+  }
+};
 
   const fetchData = async (pipeline) => {
     const response = await fetch('/api/query', {
@@ -92,20 +113,6 @@ const FormComponent = () => {
     });
     const responseData = await response.json();
     return responseData;
-  };
-
-  const renderInput = (field) => {
-    const fieldValue = field.value !== "" ? field.value : formState[field.name] || '';
-    switch (field.type) {
-      case 'text':
-        return <TextInput label={field.label} sizeVariant={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
-      case 'number':
-        return <NumberInput label={field.label} size={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
-      case 'date':
-        return <DatePicker label={field.label} size={'small'} disabled={field.disabled} placeholder={field.type} value={fieldValue} onChange={(event) => handleChange(event, field.type, field.name)} />;
-      default:
-        return null;
-    }
   };
 
   const handleSubmit = async (event) => {
