@@ -12,7 +12,7 @@ function Header() {
         <MongoDBLogoMark />
       </div>
       <div className={styles["title-container"]}>
-        <H2>MongoDB Vector Search and OpenAI Embeddings Demo for Combating AML and Fraud</H2>
+        <H2>Enhance Fraud and AML Detection Accuracy</H2>
       </div>
       <div className={styles["logout-container"]}>
         <Link href="/login">
