@@ -2,7 +2,6 @@ import pymongo
 from bson import ObjectId
 from dotenv import load_dotenv
 import os
-from sentence_transformers import SentenceTransformer
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 from openai import OpenAI

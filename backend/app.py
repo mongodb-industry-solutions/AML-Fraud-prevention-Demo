@@ -4,7 +4,6 @@ from flask_cors import CORS
 import pymongo
 from dotenv import load_dotenv
 import os
-from sentence_transformers import SentenceTransformer
 from datetime import datetime, timedelta
 from openai import OpenAI
 import numpy as np
@@ -24,7 +23,6 @@ db = client[database_name]
 accounts = db['accounts']
 collection = db['transactions']
 
-#model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
 
 def get_embedding(text, model="text-embedding-3-small"):
    res = OAI.embeddings.create(input = [text], model=model)
@@ -155,6 +153,10 @@ def vector_search_pipeline(test, limit, query_vector):
         ]
     return pipeline
 
+@app.route("/", methods=["GET"])
+def root():
+    return {"status": "Server is running!"}
+
 @app.route("/embedings", methods=["GET"])
 def embedings():
     _id = ObjectId(request.args.get("_id"))
@@ -205,3 +207,4 @@ def verification():
 
 if __name__ == "__main__": 
     app.run(host="0.0.0.0", port=8080, debug=False)
+    

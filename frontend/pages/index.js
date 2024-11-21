@@ -20,17 +20,11 @@ const HomePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (router.isReady) {
-      let clientId = router.query.clientid;
-      localStorage.setItem('login', clientId);
-      console.log('clientId', clientId)
-      if (!clientId) {
-        clientId = localStorage.getItem('_id');
-        console.log('login', clientId)
-      } 
-      check(parseInt(clientId, 10));
-    }
-  }, [router.isReady, router.query]);
+    const clientId = '48172';
+    localStorage.setItem('login', clientId);
+    console.log('clientId', clientId);
+    check(parseInt(clientId, 10));
+  }, []);
 
   const check = async (acc_id) => {
     const response = await fetch('/api/query', {

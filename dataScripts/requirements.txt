@@ -2,6 +2,5 @@
 bson==0.5.10
 pymongo==4.6.2
 python-dotenv==1.0.1
-sentence-transformers==2.2.2
 openai==1.16.2
 mimesis==10.1.0
