@@ -74,7 +74,7 @@ const HomePage = () => {
   - **New Transaction Screen**: Allows users to simulate a transaction.
   
   ## How to Simulate a Transaction
-  1. Provide counterparty details (Originator and Beneficiary) and transaction details. Only the Beneficiary Name and transaction amount are required.
+  1. Provide counterparty details (Originator and Beneficiary) and transaction details. Only the Beneficiary Entity Name and transaction amount are required. One can use one of the Beneficiary Entity Name that has appeared in My Transactions.
   2. Click submit to see Atlas vector search in action.
   3. The submitted transaction is processed for both fraud detection and AML.
   
