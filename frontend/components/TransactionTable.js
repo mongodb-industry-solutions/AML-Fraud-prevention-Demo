@@ -52,7 +52,10 @@ const TransactionTable = () => {
   }, []);
 
   const formatFieldName = (fieldName) => {
-    return fieldName.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+    if (fieldName === 'beneficiary_type') {
+      return 'Beneficiary Entity Name';
+    } else
+      return fieldName.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
   };
   
   return (
