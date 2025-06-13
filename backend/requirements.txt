@@ -2,5 +2,5 @@ Flask==3.0.2
 Flask-Cors==3.0.10
 pymongo==4.6.2
 python-dotenv==1.0.1
-openai==1.16.2
+voyageai==0.3.2
 sentence-transformers==2.2.2

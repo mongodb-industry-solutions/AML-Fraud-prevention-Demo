@@ -4,13 +4,13 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
-from openai import OpenAI
+from voyageai.vogaye_ai_embeddings import VogayeAIEmbeddings
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message="TypedStorage is deprecated.*")
 
 load_dotenv()
-OAI = OpenAI()
+embedding_client = VogayeAIEmbeddings(api_key=os.getenv("EMBEDDING_API_KEY"))
 
 mongo_uri = os.getenv("MONGODB_URI")
 client = pymongo.MongoClient(mongo_uri)
@@ -19,9 +19,8 @@ db = client[database_name]
 accounts = db['accounts']
 collection = db['transactions']
 
-def get_embedding(text, model="text-embedding-3-small"):
-   res = OAI.embeddings.create(input = [text], model=model)
-   return res.data[0].embedding
+def get_embedding(text, model="voyage-01"):
+   return embedding_client.get_embeddings(model_id=model, text=text)
 
 
 def bulk_document(documents):

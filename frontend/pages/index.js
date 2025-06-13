@@ -67,7 +67,7 @@ const HomePage = () => {
   const markdownText = `This demo showcases how MongoDB vector search can enhance fraud and AML detection accuracy by instantly identifying suspicious activity.
   
   ## Fraud and AML Detection Workflow
-  Using synthetic data [1] for payment fraud and AML, incoming transactions are evaluated based on the percentage of previous transactions with similar characteristics that have failed due to suspicious activity. This is achieved through the use of OpenAI vector embeddings [2] and Atlas Vector search.
+  Using synthetic data [1] for payment fraud and AML, incoming transactions are evaluated based on the percentage of previous transactions with similar characteristics that have failed due to suspicious activity. This is achieved through the use of MongoDB Atlas Vector search.
   
   ## Dashboard Features
   - **My Transactions**: A read-only display of all previous transactions of the user.
