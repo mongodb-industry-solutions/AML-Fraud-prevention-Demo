@@ -1,4 +1,4 @@
-# MongoDB Vector Search and OpenAI Embeddings for Combating AML and Fraud Demo
+# MongoDB Vector Search and Embeddings for Combating AML and Fraud Demo
 
 Fraud and anti-money laundering (AML) are major concerns for both businesses and consumers, affecting areas like financial services and e-commerce. Traditional methods of tackling these issues, such as rule-based systems and predictive artificial intelligence (AI), have been useful over the years but can be outsmarted by clever fraudsters who are constantly leveraging new techniques.  Enter generative AI, the next step in the evolution of machine learning and AI for fraud detection. This technology brings real-time analysis and adaptive learning to the table, greatly improving how we spot and react to fraud.
 
@@ -11,7 +11,7 @@ The demo will therefore present a Know Your Customer (KYC) API, to be able to fl
 ![image](/Architecture.png)
 
 > [!Note]
-> As the title of the demo indicates, we will be using an OpenAI model and therefore you will need an OpenAI API KEY. This is not included in the GitHub. You can also decide to change to an open-source model but this will require some light code changes.
+> As the title of the demo indicates, we will be using an embedding model and therefore you will need an API KEY. This is not included in the GitHub. You can also decide to change to an open-source model but this will require some light code changes.
 
 ## Installation
 
@@ -49,7 +49,7 @@ make clean
 
 ## Summary
 
-This demonstration serves as an interesting example for clearing transactions using innovative technologies such as OpenAI embeddings and MongoDB search capabilities.
+This demonstration serves as an interesting example for clearing transactions using innovative technologies such as embedding models and MongoDB search capabilities.
 
 In the previous sections, we explored how to:
 - Create your own dataset
@@ -64,7 +64,7 @@ You can also dive into the following resources:
 
 ## Disclaimer
 
-This is an alpha version of the proposed idea at .Local NYC and is an example solution and should be treated as such. Main focus of this solution is to showcase Vector search.
+This is an alpha version of the proposed idea at .Local NYC and is an example solution and should be treated as such. Main focus of this solution is to showcase Vector search.
 
 This product is not a MongoDB official product. Use at your own risk!
 

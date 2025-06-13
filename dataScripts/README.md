@@ -17,7 +17,7 @@ Next, please make sure to add a .env file in the folder <location_of_your_repo>/
 ```md
 MONGODB_URI=<Your_connection_string>
 MONGODB_DB=AML_Fraud_detection
-OPENAI_API_KEY=<Your_OpenAI_api_key>
+EMBEDDING_API_KEY=<Your_embedding_model_api_key>
 ```
 
 > [!Note]
